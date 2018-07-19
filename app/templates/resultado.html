@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+  {% block content %}
+    <h2> Resultado Final <h2>
+    <h3 {{ produto.nome }}>  </h3>
+    <h4> Custos </h4>
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in selecao%}
+      <tr>
+        <th scope="row">{{ i.id }}</th>
+        <td>{{ i.nome }}</td>
+        <td>{{ i.qtd }}</td>
+        <td>{{ i.valor }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td> Total:{{ resultado}} </td>
+      </tr>
+    </tbody>
+  </table>
+  <h4> Margem de Lucro: {{ produto.margemLucro }}% </h4>
+  <h4> Rendimento: {{ produto.rendimento }} Unidades</h4>
+  <h4> Categoria: {{ produto.categoria }} </h4>
+  <h3> O valor de cada unidade de {{ produto.nome }} deverá custar R${{ valorFinal }}
+  <div class="col-md-8" style="margin-left: 80%;">
+  <button type="button" onclick="imprimir()" id="btnimprimir" class="btn btn-success">Imprimir</button>
+  </div>
+<script type="text/javascript">
+    function imprimir (){
+      document.getElementById('btnimprimir').style.display="none";
+      window.print();
+    }
+</script>
+  {% endblock%}

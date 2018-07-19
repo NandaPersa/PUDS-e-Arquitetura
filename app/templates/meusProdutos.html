@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+  {% block content %}
+  <h2> Meus Produtos </h2>
+  <ul class="list-group">
+    {% for i in selecao%}
+      <a href="{{ url_for('rotas') }}?id={{ i.id }}"><li class="list-group-item"> {{ i.nome }} </li>
+      <a href="{{ url_for('deletarProduto')}}?id={{ i.id }}"<button type="button" class="btn btn-danger">Excluir</button></a>
+    {% endfor %}
+  </ul>
+
+  {% endblock%}

@@ -1,0 +1,73 @@
+  {% extends 'layout.html' %}
+
+    {% block content %}
+    <div class="col-md-4 col-md-offset-4">
+      <h2>Informações sobre produto</h2>
+      <form action="" method="POST" name="formProduct">
+        {{ formu.csrf_token}}
+        <div class="form-group">
+          <label for="exampleInputNome1">Nome do seu produto?</label>
+          {{ formu.nome(class="form-control", id="nome") }}
+          </div>
+        <div class="form-group">
+          <label for="exampleInputUserName1">Qual a Categoria do seu produto?</label>
+          <select class="form-control" name="cate" id="categoria">
+            <option> </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Quantas unidades Renderam?</label>
+            {{ formu.rendimento(class="form-control", id="rendimento") }}
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Qual a margem de lucro você deseja?</label>
+            {{ formu.margemLucro(class="form-control", id="margemLucro") }}
+          </div>
+        <button type="button" onclick="insert()" class="btn btn-success">Continuar</button>
+
+    </div>
+    <script>
+    var lista = new Array();
+    function categoria(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", "teste", false);
+      xhttp.send();
+      text = xhttp.responseText
+      var result = JSON.parse(text);
+      for (var i = 0; i<=300;i++){
+        if(result.categorias[i] == null || result.categorias[i]==''){
+          break;
+        }
+        lista.push(result.categorias[i]);
+      }
+
+    }
+     function preencher(){
+       categoria();
+       document.formProduct.cate.options.length = lista.length;
+       for (i=0;i < lista.length; i++){
+         document.formProduct.cate.options[i] = new Option(lista[i], lista[i]);
+       }
+     }
+
+    window.onload = function(){
+      preencher();
+  }
+  function insert(){
+              var obj = { "nome": document.getElementById('nome').value, "categoria":  document.getElementById('categoria').value, "rendimento":  document.getElementById('rendimento').value, "margemLucro":  document.getElementById('margemLucro').value};
+              var dados = JSON.stringify(obj);
+              $.ajax({
+                      type: "POST",
+                      url: "/createProduct",
+                      data: dados,
+                      success: function(){},
+                      dataType: "json",
+                      contentType : "application/json"
+                    });
+                    window.location = '/createCustos';
+                    return false;
+          }
+
+
+    </script>
+    {% endblock %}

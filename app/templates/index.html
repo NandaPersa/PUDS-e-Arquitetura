@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+       <meta charset="utf-8"/>
+       <title>Home</title>
+       <link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}">
+   </head>
+   <body style="background-color:#E6E6FA">
+     <div class="container text-center">
+      <img src="{{ url_for('static', filename="img/duvida.png")}}"  width="390" height="420" alt="duvida">
+      <h1>Quanto Vale o meu Produto?</h1>
+      <h3> Tem um produto e não sabe quanto cobrar por ele? Nós dizemos a você.</h3>
+      <a href="{{ url_for('registerUser') }}">
+      <button type="button" class="btn btn-primary btn-lg">Cadastrar-se</button></a>
+      <a href="{{ url_for('login') }}">
+      <button type="button" class="btn btn-primary btn-lg">Entrar</button></a>
+
+    </div>
+
+   <script src="{{ url_for('static', filename="js/bootstrap.min.js") }}"> </script>
+
+   </body>
+</html>
